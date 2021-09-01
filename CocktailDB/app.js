@@ -1,4 +1,12 @@
 document.getElementById('error').style.display='none';
+document.getElementById('spinner').style.display='none';
+
+const toggleSpinner=value=>{
+    document.getElementById('spinner').style.display=value;
+}
+const toggleSearch=value=>{
+    document.getElementById('card').style.display=value;
+}
 
 const searchCocktail=()=>{
     const search=document.getElementById('search');
@@ -9,6 +17,8 @@ const searchCocktail=()=>{
     if(searchText==''){
         document.getElementById('error').style.display='block';
     }else{
+        toggleSpinner('block');
+        toggleSearch('none');
         const url=`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchText}`;
         fetch(url)
         .then(res=>res.json())
@@ -20,7 +30,7 @@ const searchCocktail=()=>{
 const displayData=(value)=>{
     const card=document.getElementById('card');
     card.textContent='';
-    value.forEach(data=>{
+    value?.forEach(data=>{
         console.log(data);
         const div=document.createElement('div');
         div.classList.add('col');
@@ -34,7 +44,9 @@ const displayData=(value)=>{
         </div>
         `;
         card.appendChild(div)
-    })
+    });
+    toggleSpinner('none');
+    toggleSearch('flex');
 }
 
 const loadData=(value)=>{
