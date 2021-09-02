@@ -27,4 +27,9 @@ const displayData=data=>{
 
     const cloud=document.getElementById('cloud');
     cloud.innerText=`${data.list[0].weather[0].description}`;
+
+    // weather icon
+    const url=`http://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png`;
+    const imgIcon=document.getElementById('weather-icon');
+    imgIcon.setAttribute('src',url);
 }
